@@ -1,7 +1,9 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Platform {
+public class Platform implements KeyListener {
 
     // Instance Variables
     PongViewer window;
@@ -32,6 +34,21 @@ public class Platform {
     }
 
     public void draw(Graphics g){
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 }
