@@ -3,17 +3,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Platform implements KeyListener {
+public class Platform{
 
     // Instance Variables
     PongViewer window;
     int x;
-    final int y = 700;
+    final int Y = 700;
+    final int PLATFORM_WIDTH = 90;
     Image image;
 
     // Constructor
-    public Platform(int x, PongViewer window){
-        this.x = x;
+    public Platform(PongViewer window){
+        x = 205;
         this.window = window;
     }
 
@@ -22,7 +23,7 @@ public class Platform implements KeyListener {
     }
 
     public int getY() {
-        return y;
+        return Y;
     }
 
     public boolean isColliding(Ball ball){
@@ -33,22 +34,20 @@ public class Platform implements KeyListener {
 
     }
 
+    public void shiftX(int shift, int xLow, int xHigh) {
+        if (x - PLATFORM_WIDTH + shift <= xLow && shift < 0) {
+            x = xLow + PLATFORM_WIDTH;
+        }
+        else if (x + PLATFORM_WIDTH + shift >= xHigh && shift > 0) {
+            x = xHigh - PLATFORM_WIDTH;
+        }
+        else {
+            x += shift;
+        }
+    }
+
     public void draw(Graphics g){
-
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
+        g.setColor(new Color(78, 182, 227, 255));
+        g.fillRect(x, Y, PLATFORM_WIDTH, 20);
     }
 }

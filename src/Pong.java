@@ -1,6 +1,8 @@
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Pong {
+public class Pong implements KeyListener {
 
     // Instance variables
     PongViewer window;
@@ -9,6 +11,7 @@ public class Pong {
     Brick[] bricks;
     Ball ball;
     Platform platform;
+    int STEP_SIZE = 10;
 
     // Constructor
     public Pong() {
@@ -19,7 +22,8 @@ public class Pong {
             bricks[i] = new Brick(0, 0, window);
         }
         ball = new Ball(0, 0, window);
-        platform = new Platform(0, window);
+        platform = new Platform(window);
+        window.addKeyListener(this);
     }
 
     public Brick[] getBricks(){
@@ -47,14 +51,40 @@ public class Pong {
     }
 
     public void run(){
-
+        window.repaint();
     }
 
     public void actionPerformed(ActionEvent e){
 
     }
 
-    public static void main(String[] args) {
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch(e.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                System.out.println("Left");
+                platform.shiftX(-STEP_SIZE, 0, window.WINDOW_WIDTH);
+                break;
+            case KeyEvent.VK_RIGHT:
+                platform.shiftX(STEP_SIZE, 0, window.WINDOW_WIDTH);
+                break;
+        }
+        window.repaint();
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    public static void main(String[] args) {
+        Pong game = new Pong();
+        game.run();
     }
 }
