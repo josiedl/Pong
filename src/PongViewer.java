@@ -6,6 +6,7 @@ public class PongViewer extends JFrame{
     // Instance Variables
     public static final int WINDOW_WIDTH = 500;
     public static final int WINDOW_HEIGHT = 800;
+    public static final int TOP_OF_WINDOW = 22;
     Pong game;
     Image[] pieces;
 
@@ -34,5 +35,11 @@ public class PongViewer extends JFrame{
         if (game.getPlatform() != null){
             game.getPlatform().draw(g);
         }
+        for (Brick[] bricks : game.getBricks()){
+            for (Brick b : bricks) {
+                b.draw(g);
+            }
+        }
+        game.getBall().draw(g);
     }
 }

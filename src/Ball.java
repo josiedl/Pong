@@ -4,16 +4,18 @@ import java.awt.event.ActionEvent;
 public class Ball {
 
     // Instance Variables
-    PongViewer window;
     int x;
     int y;
     Image image;
+    final int radius = 5;
+    // Velocity - how much to move the ball in one time unit
+    private int dx = 10;
+    private int dy = 10;
 
     // Constructor
-    public Ball(int x, int y, PongViewer window){
+    public Ball(int x, int y){
         this.x = x;
         this.y = y;
-        this.window = window;
     }
 
     public int getX() {
@@ -24,12 +26,25 @@ public class Ball {
         return y;
     }
 
-    public void draw(Graphics g) {
-
+    public void move() {
+        x = x + dx;
+        y = y + dy;
+    }
+    public void bounce(int xLow, int xHigh, int yLow, int yHigh) {
+        // Check for an x bounce.  Note that we bounce if the x is too
+        //  low or too high AND IS HEADING IN THE WRONG DIRECTION.
+        if ((x - radius <= xLow && dx < 0) || (x + radius >= xHigh && dx > 0)) {
+            dx = -dx;
+        }
+        // Now check for a y bounce.
+        if ((y - radius <= yLow && dy < 0) || (y + radius >= yHigh && dy > 0)) {
+            dy = -dy;
+        }
     }
 
-    public void actionPerformed(ActionEvent e){
-
+    public void draw(Graphics g) {
+        g.setColor(new Color(255, 235, 137, 255));
+        g.fillOval(x, y, radius * 2, radius * 2);
     }
 
     public boolean isColliding(Brick brick, Platform platform) {

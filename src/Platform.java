@@ -35,8 +35,8 @@ public class Platform{
     }
 
     public void shiftX(int shift, int xLow, int xHigh) {
-        if (x - PLATFORM_WIDTH + shift <= xLow && shift < 0) {
-            x = xLow + PLATFORM_WIDTH;
+        if (x + shift <= xLow && shift < 0) {
+            x = xLow;
         }
         else if (x + PLATFORM_WIDTH + shift >= xHigh && shift > 0) {
             x = xHigh - PLATFORM_WIDTH;

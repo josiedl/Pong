@@ -7,6 +7,8 @@ public class Brick {
     int x;
     int y;
     Image image;
+    public static final int BRICK_WIDTH = 70;
+    public static final int BRICK_HEIGHT = 15;
 
     // Constructor
     public Brick(int x, int y, PongViewer window){
@@ -28,6 +30,7 @@ public class Brick {
     }
 
     public void draw(Graphics g){
-
+        g.setColor(new Color(210, 108, 86, 255));
+        g.fillRect(x, y, BRICK_WIDTH, BRICK_HEIGHT);
     }
 }
