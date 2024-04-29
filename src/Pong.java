@@ -1,9 +1,7 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import javax.swing.*;
+import java.awt.event.*;
 
-public class Pong implements KeyListener, ActionListener {
+public class Pong implements KeyListener, ActionListener, MouseListener {
 
     // Instance variables
     PongViewer window;
@@ -12,7 +10,9 @@ public class Pong implements KeyListener, ActionListener {
     Brick[][] bricks;
     Ball ball;
     Platform platform;
-    int STEP_SIZE = 15;
+
+    int STEP_SIZE = 20;
+    final static int DELAY_IN_MILLISEC = 30;
 
     // Constructor
     public Pong() {
@@ -28,9 +28,10 @@ public class Pong implements KeyListener, ActionListener {
             }
             y += Brick.BRICK_HEIGHT + 15;
         }
-        ball = new Ball(205, 800);
+        ball = new Ball(100, 100);
         platform = new Platform(window);
         window.addKeyListener(this);
+        window.addMouseListener(this);
     }
 
     public Brick[][] getBricks(){
@@ -91,8 +92,35 @@ public class Pong implements KeyListener, ActionListener {
 
     }
 
+    @Override
+    public void mousePressed(MouseEvent e) {
+//        // Change the color
+//        clickNum++;
+//        b.setColor(COLORS[clickNum % 3]);
+//
+//        window.repaint();
+//
+//        // For demo purposes only
+//        System.out.println("mousePressed event handler executed.");
+
+        // figure out how to get play button
+        window.setStarted(true);
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
     public static void main(String[] args) {
         Pong game = new Pong();
+        Timer clock = new Timer(DELAY_IN_MILLISEC, game);
+        clock.start();
         game.run();
     }
 }

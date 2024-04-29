@@ -7,7 +7,7 @@ public class Ball {
     int x;
     int y;
     Image image;
-    final int radius = 5;
+    final int radius = 10;
     // Velocity - how much to move the ball in one time unit
     private int dx = 10;
     private int dy = 10;
@@ -43,7 +43,7 @@ public class Ball {
     }
 
     public void draw(Graphics g) {
-        g.setColor(new Color(255, 235, 137, 255));
+        g.setColor(new Color(255, 229, 95, 255));
         g.fillOval(x, y, radius * 2, radius * 2);
     }
 
