@@ -103,6 +103,6 @@ public class PongViewer extends JFrame{
                 game.getBall().draw(g);
             }
         }
-        // if game over
+        // if game is over
     }
 }
