@@ -7,6 +7,7 @@ public class Brick {
     int x;
     int y;
     Image image;
+    public boolean isVisible;
     public static final int BRICK_WIDTH = 70;
     public static final int BRICK_HEIGHT = 15;
 
@@ -15,6 +16,15 @@ public class Brick {
         this.x = x;
         this.y = y;
         this.window = window;
+        isVisible = true;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
     }
 
     public int getX() {
@@ -30,7 +40,13 @@ public class Brick {
     }
 
     public void draw(Graphics g){
-        g.setColor(new Color(210, 108, 86, 255));
-        g.fillRect(x, y, BRICK_WIDTH, BRICK_HEIGHT);
+        if (isVisible){
+            g.setColor(new Color(210, 108, 86, 255));
+            g.fillRect(x, y, BRICK_WIDTH, BRICK_HEIGHT);
+        }
+        else {
+            g.setColor(Color.WHITE);
+            g.fillRect(x, y, BRICK_WIDTH, BRICK_HEIGHT);
+        }
     }
 }

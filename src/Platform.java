@@ -9,7 +9,7 @@ public class Platform{
     PongViewer window;
     int x;
     final int Y = 700;
-    final int PLATFORM_WIDTH = 90;
+    public static final int PLATFORM_WIDTH = 90;
     Image image;
 
     // Constructor

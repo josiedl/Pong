@@ -66,6 +66,15 @@ public class Pong implements KeyListener, ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e){
         ball.move();
         ball.bounce(0, PongViewer.WINDOW_WIDTH, PongViewer.TOP_OF_WINDOW, PongViewer.WINDOW_HEIGHT);
+        for (int i = 0; i < bricks.length; i ++){
+            for (int j = 0; j < bricks[0].length; j++){
+                if (ball.isColliding(bricks[i][j], platform) && bricks[i][j].isVisible()){
+                    // switch directions should only switch either side to side or up and down
+                    ball.switchDirections();
+                    bricks[i][j].setVisible(false);
+                }
+            }
+        }
         window.repaint();
     }
 

@@ -30,6 +30,18 @@ public class Ball {
         x = x + dx;
         y = y + dy;
     }
+
+    // figure this out
+    public boolean isColliding(Brick brick, Platform platform) {
+        int diameter = radius * 2;
+        if ((y + diameter == platform.getY()) || (y == brick.getY() + Brick.BRICK_HEIGHT) || (y + diameter == brick.getY() + Brick.BRICK_HEIGHT)
+                || (x + diameter == platform.getX()) || (x + diameter == brick.getX())
+                || (x == platform.getX() + Platform.PLATFORM_WIDTH) || (x == brick.getX() + Brick.BRICK_WIDTH)) {
+            return true;
+        }
+        return false;
+    }
+
     public void bounce(int xLow, int xHigh, int yLow, int yHigh) {
         // Check for an x bounce.  Note that we bounce if the x is too
         //  low or too high AND IS HEADING IN THE WRONG DIRECTION.
@@ -42,12 +54,14 @@ public class Ball {
         }
     }
 
+    // figure this out
+    public void switchDirections(){
+        dx = -dx;
+        dy = -dy;
+    }
+
     public void draw(Graphics g) {
         g.setColor(new Color(255, 229, 95, 255));
         g.fillOval(x, y, radius * 2, radius * 2);
-    }
-
-    public boolean isColliding(Brick brick, Platform platform) {
-        return false;
     }
 }
