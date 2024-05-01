@@ -95,17 +95,10 @@ public class Pong implements KeyListener, ActionListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-//        // Change the color
-//        clickNum++;
-//        b.setColor(COLORS[clickNum % 3]);
-//
-//        window.repaint();
-//
-//        // For demo purposes only
-//        System.out.println("mousePressed event handler executed.");
-
-        // figure out how to get play button
-        window.setStarted(true);
+        // If play button is clicked, start the game
+        if (e.getX() < 400 && e.getX() > 100 && e.getY() < 690 && e.getY() > 580){
+            window.setStarted(true);
+        }
     }
 
     @Override

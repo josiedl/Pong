@@ -79,11 +79,42 @@ public class PongViewer extends JFrame{
     }
 
     public void drawInstructions(Graphics g){
-        // print instructions
+        // Draw title
+        g.setColor(new Color(191, 255, 170, 255));
+        g.setFont(new Font("Serif", Font.PLAIN, 80));
+        g.drawString("P•O•N•G", 75, 150);
+
+        // Draw separators
+        g.setColor(new Color(255, 153, 90, 255));
+        g.drawString("* * * * * * * *", 5, 275);
+        g.drawString("* * * * * * * *", 5, 550);
+
+        // Write instructions
+        g.setColor(new Color(192, 148, 236, 255));
+        g.setFont(new Font("Serif", Font.PLAIN, 20));
+        g.drawString("•Use the platform to bounce", 50, 300);
+        g.drawString("  the ball and break the bricks!", 50, 330);
+        g.drawString("•Break all the bricks to win!", 50, 380);
+        g.drawString("•Don't let the ball fall!", 50, 430);
+
+        // Draw mini versions of the objects
+        g.setColor(new Color(78, 182, 227, 255));
+        g.fillRect(380, 300, 70, 20);
+        g.setColor(new Color(210, 108, 86, 255));
+        g.fillRect(360, 365, 60, 15);
+        g.setColor(new Color(255, 229, 95, 255));
+        g.fillOval(330, 410, 20, 20);
+
+        // Draw the play button
+        g.setColor(new Color(255, 161, 211, 255));
+        g.fillRect(100, 580, 300, 110);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Serif", Font.PLAIN, 70));
+        g.drawString("PLAY", 165, 660);
     }
 
     public void myPaint(Graphics g){
-        // print instructions
+        drawInstructions(g);
         if (isStarted) {
             g.setColor(Color.WHITE);
             g.fillRect(0,  0, WINDOW_WIDTH, WINDOW_HEIGHT);
