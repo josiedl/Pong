@@ -47,33 +47,38 @@ public class Pong implements KeyListener, ActionListener, MouseListener {
         return platform;
     }
 
-    public boolean checkWin(){
-        return false;
+    public boolean isWin() {
+        return isWin;
     }
 
-    public boolean checkGameOver(){
-        return false;
+    public boolean isGameOver() {
+        return isGameOver;
     }
 
-    public boolean checkCollision(){
-        return false;
+    public void setWin(boolean win) {
+        isWin = win;
     }
 
-    public void run(){
-        window.repaint();
+    public void setGameOver(boolean gameOver) {
+        isGameOver = gameOver;
     }
 
     public void actionPerformed(ActionEvent e){
+        if (ball.getY() + Ball.radius > platform.getY()) {
+            setGameOver(true);
+        }
+        int count = 0;
         ball.move();
-        ball.bounce(0, PongViewer.WINDOW_WIDTH, PongViewer.TOP_OF_WINDOW, PongViewer.WINDOW_HEIGHT);
         for (int i = 0; i < bricks.length; i ++){
             for (int j = 0; j < bricks[0].length; j++){
-                if (ball.isColliding(bricks[i][j], platform) && bricks[i][j].isVisible()){
-                    // switch directions should only switch either side to side or up and down
-                    ball.switchDirections();
-                    bricks[i][j].setVisible(false);
+                ball.bounce(0, PongViewer.WINDOW_WIDTH, PongViewer.TOP_OF_WINDOW, PongViewer.WINDOW_HEIGHT, bricks[i][j], platform);
+                if (bricks[i][j].isVisible()){
+                    count++;
                 }
             }
+        }
+        if (count == 0) {
+            setWin(true);
         }
         window.repaint();
     }
@@ -134,6 +139,5 @@ public class Pong implements KeyListener, ActionListener, MouseListener {
         Pong game = new Pong();
         Timer clock = new Timer(DELAY_IN_MILLISEC, game);
         clock.start();
-        game.run();
     }
 }

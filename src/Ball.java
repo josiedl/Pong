@@ -7,7 +7,7 @@ public class Ball {
     int x;
     int y;
     Image image;
-    final int radius = 10;
+    public static final int radius = 10;
     // Velocity - how much to move the ball in one time unit
     private int dx = 10;
     private int dy = 10;
@@ -31,33 +31,25 @@ public class Ball {
         y = y + dy;
     }
 
-    // figure this out
-    public boolean isColliding(Brick brick, Platform platform) {
+    public void bounce(int xLow, int xHigh, int yLow, int yHigh, Brick brick, Platform platform) {
         int diameter = radius * 2;
-        if ((y + diameter == platform.getY()) || (y == brick.getY() + Brick.BRICK_HEIGHT) || (y + diameter == brick.getY() + Brick.BRICK_HEIGHT)
-                || (x + diameter == platform.getX()) || (x + diameter == brick.getX())
-                || (x == platform.getX() + Platform.PLATFORM_WIDTH) || (x == brick.getX() + Brick.BRICK_WIDTH)) {
-            return true;
-        }
-        return false;
-    }
-
-    public void bounce(int xLow, int xHigh, int yLow, int yHigh) {
-        // Check for an x bounce.  Note that we bounce if the x is too
-        //  low or too high AND IS HEADING IN THE WRONG DIRECTION.
-        if ((x - radius <= xLow && dx < 0) || (x + radius >= xHigh && dx > 0)) {
+        if (x <= 0 || x  + diameter >= PongViewer.WINDOW_WIDTH) {
             dx = -dx;
         }
-        // Now check for a y bounce.
-        if ((y - radius <= yLow && dy < 0) || (y + radius >= yHigh && dy > 0)) {
+        if (y <= PongViewer.TOP_OF_WINDOW || y + diameter >= PongViewer.WINDOW_HEIGHT) {
             dy = -dy;
         }
-    }
-
-    // figure this out
-    public void switchDirections(){
-        dx = -dx;
-        dy = -dy;
+        if (((x + diameter == brick.getX()) || (x == brick.getX() + Brick.BRICK_WIDTH)) && ((y + radius < brick.getY() + Brick.BRICK_HEIGHT) && (y + radius > brick.getY()) && brick.isVisible())){
+            dx = -dx;
+            brick.setVisible(false);
+        }
+        if (((y + diameter == brick.getY()) || (y == brick.getY() + Brick.BRICK_HEIGHT)) && ((x + radius < brick.getX() + Brick.BRICK_WIDTH) && (x + radius > brick.getX()) && brick.isVisible())){
+            dy = -dy;
+            brick.setVisible(false);
+        }
+        if ((y + diameter == platform.getY()) && ((x + radius < brick.getX() + Brick.BRICK_WIDTH) && (x + radius > brick.getX()))){
+            dy = -dy;
+        }
     }
 
     public void draw(Graphics g) {

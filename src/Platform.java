@@ -10,6 +10,7 @@ public class Platform{
     int x;
     final int Y = 700;
     public static final int PLATFORM_WIDTH = 90;
+    public static final int PLATFORM_HEIGHT = 20;
     Image image;
 
     // Constructor
@@ -48,6 +49,6 @@ public class Platform{
 
     public void draw(Graphics g){
         g.setColor(new Color(78, 182, 227, 255));
-        g.fillRect(x, Y, PLATFORM_WIDTH, 20);
+        g.fillRect(x, Y, PLATFORM_WIDTH, PLATFORM_HEIGHT);
     }
 }

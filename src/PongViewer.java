@@ -134,6 +134,20 @@ public class PongViewer extends JFrame{
                 game.getBall().draw(g);
             }
         }
-        // if game is over
+        if (game.isWin()) {
+            g.setColor(Color.WHITE);
+            g.fillRect(0,  0, WINDOW_WIDTH, WINDOW_HEIGHT);
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Serif", Font.PLAIN, 50));
+            g.drawString("YOU WIN", 75, 150);
+
+        }
+        if (game.isGameOver()) {
+            g.setColor(Color.WHITE);
+            g.fillRect(0,  0, WINDOW_WIDTH, WINDOW_HEIGHT);
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Serif", Font.PLAIN, 50));
+            g.drawString("GAME OVER", 75, 150);
+        }
     }
 }
