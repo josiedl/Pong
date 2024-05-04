@@ -27,8 +27,8 @@ public class Ball {
     }
 
     public void move() {
-        x = x + dx;
-        y = y + dy;
+        x = x - dx;
+        y = y - dy;
     }
 
     public void bounce(int xLow, int xHigh, int yLow, int yHigh, Brick brick, Platform platform) {

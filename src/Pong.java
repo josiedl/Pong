@@ -65,7 +65,9 @@ public class Pong implements KeyListener, ActionListener, MouseListener {
 
     public void actionPerformed(ActionEvent e){
         int count = 0;
-        ball.move();
+        if (window.isStarted()) {
+            ball.move();
+        }
         for (int i = 0; i < bricks.length; i ++){
             for (int j = 0; j < bricks[0].length; j++){
                 ball.bounce(0, PongViewer.WINDOW_WIDTH, PongViewer.TOP_OF_WINDOW, PongViewer.WINDOW_HEIGHT, bricks[i][j], platform);
@@ -77,7 +79,7 @@ public class Pong implements KeyListener, ActionListener, MouseListener {
         if (count == 0) {
             setWin(true);
         }
-        if (ball.getY() > platform.getY() && window.isStarted()) {
+        if (ball.getY() > platform.getY()) {
             setGameOver(true);
         }
         window.repaint();
