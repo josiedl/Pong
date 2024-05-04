@@ -33,7 +33,7 @@ public class Ball {
 
     public void bounce(int xLow, int xHigh, int yLow, int yHigh, Brick brick, Platform platform) {
         int diameter = radius * 2;
-        if (x <= 0 || x  + diameter >= PongViewer.WINDOW_WIDTH) {
+        if (x <= 0 || x + diameter >= PongViewer.WINDOW_WIDTH) {
             dx = -dx;
         }
         if (y <= PongViewer.TOP_OF_WINDOW || y + diameter >= PongViewer.WINDOW_HEIGHT) {
@@ -47,7 +47,7 @@ public class Ball {
             dy = -dy;
             brick.setVisible(false);
         }
-        if ((y + diameter == platform.getY()) && ((x + radius < brick.getX() + Brick.BRICK_WIDTH) && (x + radius > brick.getX()))){
+        if ((y + diameter == platform.getY()) && ((x + radius < platform.getX() + Platform.PLATFORM_WIDTH) && (x + radius > platform.getX()))){
             dy = -dy;
         }
     }

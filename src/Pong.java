@@ -29,8 +29,8 @@ public class Pong implements KeyListener, ActionListener, MouseListener {
             }
             y += Brick.BRICK_HEIGHT + 15;
         }
-        ball = new Ball(100, 100);
         platform = new Platform(window);
+        ball = new Ball(240, 600);
         window.addKeyListener(this);
         window.addMouseListener(this);
     }
@@ -64,9 +64,6 @@ public class Pong implements KeyListener, ActionListener, MouseListener {
     }
 
     public void actionPerformed(ActionEvent e){
-        if (ball.getY() + Ball.radius > platform.getY()) {
-            setGameOver(true);
-        }
         int count = 0;
         ball.move();
         for (int i = 0; i < bricks.length; i ++){
@@ -79,6 +76,9 @@ public class Pong implements KeyListener, ActionListener, MouseListener {
         }
         if (count == 0) {
             setWin(true);
+        }
+        if (ball.getY() > platform.getY() && window.isStarted()) {
+            setGameOver(true);
         }
         window.repaint();
     }
