@@ -76,12 +76,15 @@ public class PongViewer extends JFrame{
     public void drawInstructions(Graphics g){
         // Draw title
         g.setColor(new Color(191, 255, 170, 255));
-        g.setFont(new Font("Serif", Font.PLAIN, 80));
-        g.drawString("P•O•N•G", 75, 150);
+        g.setFont(new Font("Serif", Font.PLAIN, 70));
+        g.drawString("B•R•I•C•K", 75, 150);
+        g.setFont(new Font("Serif", Font.PLAIN, 30));
+        g.drawString("BREAKER", 190, 190);
 
         // Draw separators
+        g.setFont(new Font("Serif", Font.PLAIN, 80));
         g.setColor(new Color(255, 153, 90, 255));
-        g.drawString("* * * * * * * *", 5, 275);
+        g.drawString("* * * * * * * *", 5, 280);
         g.drawString("* * * * * * * *", 5, 550);
 
         // Write instructions
