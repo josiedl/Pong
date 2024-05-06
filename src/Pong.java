@@ -76,6 +76,7 @@ public class Pong implements KeyListener, ActionListener, MouseListener {
         }
         if (count == 0) {
             setWin(true);
+            window.setStarted(false);
         }
         if (ball.getY() > platform.getY() + Platform.PLATFORM_HEIGHT) {
             setGameOver(true);

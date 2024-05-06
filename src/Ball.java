@@ -49,9 +49,9 @@ public class Ball {
         if ((y + diameter == platform.getY()) && ((x + radius < platform.getX() + Platform.PLATFORM_WIDTH) && (x + radius > platform.getX()))){
             dy = -dy;
         }
-        if (((x + diameter == platform.getX()) || (x == platform.getX() + Platform.PLATFORM_WIDTH)) && ((y + radius < platform.getY() + Platform.PLATFORM_WIDTH) && (y + radius > brick.getY()))){
-            dx = -dx;
-        }
+//        if (((x + diameter == platform.getX()) || (x == platform.getX() + Platform.PLATFORM_WIDTH)) && ((y + radius < platform.getY() + Platform.PLATFORM_WIDTH) && (y + radius > brick.getY()))){
+//            dx = -dx;
+//        }
     }
 
     public void draw(Graphics g) {
