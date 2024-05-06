@@ -6,7 +6,6 @@ public class Brick {
     PongViewer window;
     int x;
     int y;
-    Image image;
     public boolean isVisible;
     public static final int BRICK_WIDTH = 70;
     public static final int BRICK_HEIGHT = 15;

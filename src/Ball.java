@@ -6,7 +6,6 @@ public class Ball {
     // Instance Variables
     int x;
     int y;
-    Image image;
     public static final int radius = 10;
     // Velocity - how much to move the ball in one time unit
     private int dx = 10;
@@ -49,6 +48,9 @@ public class Ball {
         }
         if ((y + diameter == platform.getY()) && ((x + radius < platform.getX() + Platform.PLATFORM_WIDTH) && (x + radius > platform.getX()))){
             dy = -dy;
+        }
+        if (((x + diameter == platform.getX()) || (x == platform.getX() + Platform.PLATFORM_WIDTH)) && ((y + radius < platform.getY() + Platform.PLATFORM_WIDTH) && (y + radius > brick.getY()))){
+            dx = -dx;
         }
     }
 

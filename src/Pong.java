@@ -11,8 +11,6 @@ public class Pong implements KeyListener, ActionListener, MouseListener {
     Brick[][] bricks;
     Ball ball;
     Platform platform;
-
-    int STEP_SIZE = 20;
     final static int DELAY_IN_MILLISEC = 30;
 
     // Constructor
@@ -79,7 +77,7 @@ public class Pong implements KeyListener, ActionListener, MouseListener {
         if (count == 0) {
             setWin(true);
         }
-        if (ball.getY() > platform.getY()) {
+        if (ball.getY() > platform.getY() + Platform.PLATFORM_HEIGHT) {
             setGameOver(true);
         }
         window.repaint();
@@ -95,10 +93,10 @@ public class Pong implements KeyListener, ActionListener, MouseListener {
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                platform.shiftX(-STEP_SIZE, 0, PongViewer.WINDOW_WIDTH);
+                platform.shiftX(-1);
                 break;
             case KeyEvent.VK_RIGHT:
-                platform.shiftX(STEP_SIZE, 0, PongViewer.WINDOW_WIDTH);
+                platform.shiftX(1);
                 break;
         }
         window.repaint();

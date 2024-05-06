@@ -9,7 +9,6 @@ public class PongViewer extends JFrame{
     public static final int WINDOW_HEIGHT = 800;
     public static final int TOP_OF_WINDOW = 22;
     Pong game;
-    Image[] pieces;
     private boolean isStarted;
     private boolean isGameOver;
 
@@ -47,10 +46,6 @@ public class PongViewer extends JFrame{
 
     public Pong getGame(){
         return game;
-    }
-
-    public Image[] getPieces(){
-        return pieces;
     }
 
     public void paint(Graphics g) {
@@ -135,19 +130,25 @@ public class PongViewer extends JFrame{
             }
         }
         if (game.isWin()) {
-            g.setColor(Color.WHITE);
-            g.fillRect(0,  0, WINDOW_WIDTH, WINDOW_HEIGHT);
             g.setColor(Color.BLACK);
+            g.fillRect(0,  0, WINDOW_WIDTH, WINDOW_HEIGHT);
+            g.setColor(new Color(255, 89, 169, 255));
             g.setFont(new Font("Serif", Font.PLAIN, 50));
-            g.drawString("YOU WIN", 75, 150);
+            g.drawString("YOU WIN!", 140, 350);
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Serif", Font.PLAIN, 30));
+            g.drawString("Thanks for playing!", 115, 400);
 
         }
         if (game.isGameOver()) {
-            g.setColor(Color.WHITE);
-            g.fillRect(0,  0, WINDOW_WIDTH, WINDOW_HEIGHT);
             g.setColor(Color.BLACK);
+            g.fillRect(0,  0, WINDOW_WIDTH, WINDOW_HEIGHT);
+            g.setColor(Color.RED);
             g.setFont(new Font("Serif", Font.PLAIN, 50));
-            g.drawString("GAME OVER", 75, 150);
+            g.drawString("GAME OVER", 110, 350);
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Serif", Font.PLAIN, 30));
+            g.drawString("Thanks for playing!", 115, 400);
         }
     }
 }

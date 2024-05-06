@@ -7,11 +7,11 @@ public class Platform{
 
     // Instance Variables
     PongViewer window;
-    int x;
-    final int Y = 700;
+    private int x;
+    private final int Y = 700;
     public static final int PLATFORM_WIDTH = 90;
     public static final int PLATFORM_HEIGHT = 20;
-    Image image;
+    private final int STEP_SIZE = 20;
 
     // Constructor
     public Platform(PongViewer window){
@@ -35,12 +35,13 @@ public class Platform{
 
     }
 
-    public void shiftX(int shift, int xLow, int xHigh) {
-        if (x + shift <= xLow && shift < 0) {
-            x = xLow;
+    public void shiftX(int direction) {
+        int shift = STEP_SIZE * direction;
+        if (x + shift <= 0 && shift < 0) {
+            x = 0;
         }
-        else if (x + PLATFORM_WIDTH + shift >= xHigh && shift > 0) {
-            x = xHigh - PLATFORM_WIDTH;
+        else if (x + PLATFORM_WIDTH + shift >= PongViewer.WINDOW_WIDTH && shift > 0) {
+            x = PongViewer.WINDOW_WIDTH - PLATFORM_WIDTH;
         }
         else {
             x += shift;
