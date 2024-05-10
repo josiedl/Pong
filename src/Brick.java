@@ -18,14 +18,7 @@ public class Brick {
         isVisible = true;
     }
 
-    public boolean isVisible() {
-        return isVisible;
-    }
-
-    public void setVisible(boolean visible) {
-        isVisible = visible;
-    }
-
+    // Getters
     public int getX() {
         return x;
     }
@@ -34,15 +27,23 @@ public class Brick {
         return y;
     }
 
-    public boolean isColliding(Ball ball){
-        return false;
+    public boolean isVisible() {
+        return isVisible;
     }
 
+    // Setters
+    public void setVisible(boolean visible) {
+        isVisible = visible;
+    }
+
+    // Draws itself
     public void draw(Graphics g){
+        // If it's visible, draw a terracotta brick
         if (isVisible){
             g.setColor(new Color(210, 108, 86, 255));
             g.fillRect(x, y, BRICK_WIDTH, BRICK_HEIGHT);
         }
+        // Otherwise, draw a white brick (looks invisible)
         else {
             g.setColor(Color.WHITE);
             g.fillRect(x, y, BRICK_WIDTH, BRICK_HEIGHT);

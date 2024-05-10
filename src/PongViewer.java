@@ -2,59 +2,48 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
+// Front end
 public class PongViewer extends JFrame{
 
     // Instance Variables
+    private Pong game;
+    private boolean isStarted;
+    private boolean isGameOver;
     public static final int WINDOW_WIDTH = 500;
     public static final int WINDOW_HEIGHT = 800;
     public static final int TOP_OF_WINDOW = 22;
-    Pong game;
-    private boolean isStarted;
-    private boolean isGameOver;
 
     // Constructor
     public PongViewer(Pong game) {
         this.game = game;
-
+        // The game has not started or ended yet
         isStarted = false;
         isGameOver = false;
-
         // Construct basic requirements for a frontend
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Pong by Josie Lee");
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setVisible(true);
-
+        // Double buffer animations so it is smooth
         createBufferStrategy(2);
     }
 
+    // Getter
     public boolean isStarted() {
         return isStarted;
     }
 
-    public boolean isGameOver() {
-        return isGameOver;
-    }
-
+    // Setter
     public void setStarted(boolean started) {
         isStarted = started;
     }
 
-    public void setGameOver(boolean gameOver) {
-        isGameOver = gameOver;
-    }
-
-    public Pong getGame(){
-        return game;
-    }
-
+    // Buffer
     public void paint(Graphics g) {
         BufferStrategy bf = this.getBufferStrategy();
         if (bf == null)
             return;
-
         Graphics g2 = null;
-
         try {
             g2 = bf.getDrawGraphics();
             // myPaint does the actual drawing, as described in ManyBallsView
@@ -64,10 +53,8 @@ public class PongViewer extends JFrame{
             // It is best to dispose() a Graphics object when done with it.
             g2.dispose();
         }
-
         // Shows the contents of the backbuffer on the screen.
         bf.show();
-
         //Tell the System to do the Drawing now, otherwise it can take a few extra ms until
         //Drawing is done which looks very jerky
         Toolkit.getDefaultToolkit().sync();
@@ -95,7 +82,7 @@ public class PongViewer extends JFrame{
         g.drawString("•Break all the bricks to win!", 50, 380);
         g.drawString("•Don't let the ball fall!", 50, 430);
 
-        // Draw mini versions of the objects
+        // Draw mini versions of the objects for instructions screen
         g.setColor(new Color(78, 182, 227, 255));
         g.fillRect(380, 300, 70, 20);
         g.setColor(new Color(210, 108, 86, 255));
@@ -111,15 +98,20 @@ public class PongViewer extends JFrame{
         g.drawString("PLAY", 165, 660);
     }
 
+    // Paints the window
     public void myPaint(Graphics g){
         drawInstructions(g);
         if (isStarted) {
+            // Clear the window
             g.setColor(Color.WHITE);
             g.fillRect(0,  0, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+            // Draw platform
             if (game.getPlatform() != null) {
                 game.getPlatform().draw(g);
             }
 
+            // Draw the bricks
             if (game.getBricks() != null) {
                 for (Brick[] bricks : game.getBricks()){
                     for (Brick b : bricks) {
@@ -128,13 +120,17 @@ public class PongViewer extends JFrame{
                 }
             }
 
+            // Draw the ball
             if (game.getBall() != null) {
                 game.getBall().draw(g);
             }
         }
+
         if (game.isWin()) {
+            // Set the window black
             g.setColor(Color.BLACK);
             g.fillRect(0,  0, WINDOW_WIDTH, WINDOW_HEIGHT);
+            // Write message
             g.setColor(new Color(255, 89, 169, 255));
             g.setFont(new Font("Serif", Font.PLAIN, 50));
             g.drawString("YOU WIN!", 140, 350);
@@ -144,8 +140,10 @@ public class PongViewer extends JFrame{
 
         }
         if (game.isGameOver()) {
+            // Set the window black
             g.setColor(Color.BLACK);
             g.fillRect(0,  0, WINDOW_WIDTH, WINDOW_HEIGHT);
+            // Write message
             g.setColor(Color.RED);
             g.setFont(new Font("Serif", Font.PLAIN, 50));
             g.drawString("GAME OVER", 110, 350);

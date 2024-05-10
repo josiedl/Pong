@@ -17,43 +17,47 @@ public class Ball {
         this.y = y;
     }
 
-    public int getX() {
-        return x;
-    }
-
+    // Getter
     public int getY() {
         return y;
     }
 
+    // Moves the ball by dx and dy
     public void move() {
         x = x - dx;
         y = y - dy;
     }
 
-    public void bounce(int xLow, int xHigh, int yLow, int yHigh, Brick brick, Platform platform) {
+    // Bounces the ball off all surfaces
+    public void bounce(Brick brick, Platform platform) {
         int diameter = radius * 2;
+        // If the ball is touching the sides, change directions laterally
         if (x <= 0 || x + diameter >= PongViewer.WINDOW_WIDTH) {
             dx = -dx;
         }
-        if (y <= PongViewer.TOP_OF_WINDOW || y + diameter >= PongViewer.WINDOW_HEIGHT) {
+        // If the ball is touching the top, change directions vertically
+        if (y <= PongViewer.TOP_OF_WINDOW ) {
             dy = -dy;
         }
+        // If the ball is touching either side of the brick, change directions laterally
         if (((x + diameter == brick.getX()) || (x == brick.getX() + Brick.BRICK_WIDTH)) && ((y + radius < brick.getY() + Brick.BRICK_HEIGHT) && (y + radius > brick.getY()) && brick.isVisible())){
             dx = -dx;
+            // Make the brick not visible
             brick.setVisible(false);
         }
+        // If the ball is touching the top or bottom of the brick, change directions vertically
         if (((y + diameter == brick.getY()) || (y == brick.getY() + Brick.BRICK_HEIGHT)) && ((x + radius < brick.getX() + Brick.BRICK_WIDTH) && (x + radius > brick.getX()) && brick.isVisible())){
             dy = -dy;
+            // Make the brick not visible
             brick.setVisible(false);
         }
+        // If the ball is touching the top of the platform, change directions vertically
         if ((y + diameter == platform.getY()) && ((x + radius < platform.getX() + Platform.PLATFORM_WIDTH) && (x + radius > platform.getX()))){
             dy = -dy;
         }
-//        if (((x + diameter == platform.getX()) || (x == platform.getX() + Platform.PLATFORM_WIDTH)) && ((y + radius < platform.getY() + Platform.PLATFORM_WIDTH) && (y + radius > brick.getY()))){
-//            dx = -dx;
-//        }
     }
 
+    // Draws itself
     public void draw(Graphics g) {
         g.setColor(new Color(255, 229, 95, 255));
         g.fillOval(x, y, radius * 2, radius * 2);
